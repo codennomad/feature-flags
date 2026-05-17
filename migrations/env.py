@@ -42,9 +42,7 @@ async def run_async_migrations() -> None:
     from src.config import settings
 
     configuration = config.get_section(config.config_ini_section, {})
-    configuration["sqlalchemy.url"] = settings.database_url.replace(
-        "postgresql+asyncpg", "postgresql+psycopg2"
-    )
+    configuration["sqlalchemy.url"] = settings.database_url
     connectable = async_engine_from_config(
         configuration,
         prefix="sqlalchemy.",
